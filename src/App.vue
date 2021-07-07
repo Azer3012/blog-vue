@@ -1,23 +1,20 @@
 <template>
   <div class="nav">
-
-    
     <router-link to="/">Home</router-link>
     <router-link to="/news">Add News</router-link>
-
   </div>
-  <router-view/>
+  <router-view />
 </template>
 
 <style>
-.nav{
+.nav {
   height: 50px;
   background-color: #eee;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.nav a{
+.nav a {
   margin-right: 15px;
   color: black;
   text-decoration: none;

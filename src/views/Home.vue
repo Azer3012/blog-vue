@@ -7,24 +7,36 @@
       </router-link>
 
       <span>Author:{{ news.data.author }}</span>
+
+      <span @click="deleteNews(news.key)" class="remove"
+        ><i class="fa fa-trash"></i
+      ></span>
     </div>
   </div>
 </template>
 <script>
+import axios from "axios";
+
 export default {
   computed: {
     allNews() {
-      
-      return this.$store.getters.allNews
+      return this.$store.getters.allNews;
     },
   },
 
-  mounted() {
-    this.$store.dispatch('getNews')
+  methods: {
+    deleteNews(userKey) {
+      axios
+        .delete(
+          `https://axios-vue-72a33-default-rtdb.firebaseio.com/news/${userKey}.json`
+        )
+        .then((res) => console.log(res));
+    },
   },
-  
-    
-  
+
+  async mounted() {
+    this.$store.dispatch("getNews");
+  },
 };
 </script>
 <style>
@@ -43,8 +55,19 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
-
+.news:hover .remove {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: block;
+  color: red;
+  cursor: pointer;
+}
+.remove {
+  display: none;
+}
 .header {
   text-align: center;
   margin-bottom: 35px;

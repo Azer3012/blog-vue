@@ -23,26 +23,28 @@ export default createStore({
             : "xeta bas verdi"
         );
     },
+    
     getNews(state, data) {
-      console.log(data);
+      state.newsList = []; //this is fix dublicate data
       for (let key in data) {
-        state.newsList=[...state.newsList,{key:key,data:data[key]}]
+        state.newsList = [...state.newsList, { key: key, data: data[key] }];
       }
     },
   },
   actions: {
-     async getNews({ commit }) {
-       await axios
+    async getNews({ commit }) {
+      await axios
         .get("https://axios-vue-72a33-default-rtdb.firebaseio.com/news.json")
         .then((res) => {
           commit("getNews", res.data);
         });
     },
+    
   },
   getters: {
-    allNews(state){
-      return state.newsList
-    }
+    allNews(state) {
+      return state.newsList;
+    },
   },
   modules: {},
 });
